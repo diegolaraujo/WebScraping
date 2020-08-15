@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebScraping.Core\WebScraping.Core.csproj" />
     <ProjectReference Include="..\WebScraping.Domain\WebScraping.Domain.csproj" />
   </ItemGroup>
 

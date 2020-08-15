@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebScraping.Domain.Commands.ProjectInfoGitHub.GetProjectInfoGithub;
 
 namespace WebScraping.Api.Controllers
@@ -17,25 +12,34 @@ namespace WebScraping.Api.Controllers
     public class ProjectInfoGitHubController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger _logger;
 
-        public ProjectInfoGitHubController(IMediator mediator)
+        public ProjectInfoGitHubController(IMediator mediator, ILogger<ProjectInfoGitHubController> logger)
         {
             this._mediator = mediator;
+            this._logger = logger;
         }
 
         [HttpGet]        
         public async Task<IActionResult> Get(string urlGitHub)
         {            
             try
-            {                
-                var request = new GetProjectInfoGitHubRequest(new Uri(urlGitHub));
+            {
+                var uri = new Uri(urlGitHub);
+                var request = new GetProjectInfoGitHubRequest(uri);
                 var result = await _mediator.Send(request);
                 return Ok(result);
+            }
+            catch( UriFormatException ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(400, "input parameter 'urlGitHub' is incorrect!");
             }
             catch (System.Exception ex)
             {
 
-                return NotFound(ex.Message);
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error");
             }            
         }   
         

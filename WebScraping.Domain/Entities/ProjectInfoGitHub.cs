@@ -1,14 +1,11 @@
-﻿using prmToolkit.NotificationPattern;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WebScraping.Domain.Entities.Base;
+﻿using WebScraping.Domain.Entities.Base;
 
 namespace WebScraping.Domain.Entities
 {
     public class ProjectInfoGitHub : EntityBase
-    {        
+    {
 
+        public string Extension { get; set; }
         public long CodeLines { get; protected set; }
         public double Bytes { get; protected set; }
 
@@ -18,8 +15,9 @@ namespace WebScraping.Domain.Entities
 
         }
 
-        public ProjectInfoGitHub(long codeLines, double bytes)
-        {                                 
+        public ProjectInfoGitHub(string extension, long codeLines, double bytes)
+        {
+            this.Extension = extension;
             this.CodeLines = codeLines;
             this.Bytes = bytes;
         }

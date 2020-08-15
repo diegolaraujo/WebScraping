@@ -1,7 +1,4 @@
-﻿using prmToolkit.NotificationPattern;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace WebScraping.Domain.Entities.Base
 {

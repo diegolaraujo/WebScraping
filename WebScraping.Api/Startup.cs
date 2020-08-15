@@ -1,3 +1,4 @@
+using HtmlAgilityPack;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Reflection;
-using WebScraping.Domain.Commands.ProjectInfoGitHub.GetProjectInfoGithub;
+using WebScraping.Core.Services.Handlers.ProjectInfoGitHub.GetProjectInfoGithub;
 
 namespace WebScraping.Api
 {
@@ -36,8 +37,12 @@ namespace WebScraping.Api
                     });
             });
 
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(GetProjectInfoGitHubRequest).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(GetProjectInfoGitHubHandler).GetTypeInfo().Assembly);
             services.AddMemoryCache();
+            services.AddLogging();
+
+            //Dependecy injection
+            services.AddTransient<HtmlWeb, HtmlWeb>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +69,7 @@ namespace WebScraping.Api
             {
                 endpoints.MapControllers();
             });
+            
         }
 
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebScraping.Domain
+﻿namespace WebScraping.Domain.Commands
 {
     using prmToolkit.NotificationPattern;
-    using System.Collections;
     using System.Collections.Generic;
 
     public class Response

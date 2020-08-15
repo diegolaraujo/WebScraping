@@ -1,13 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace WebScraping.Domain.Utils
+namespace WebScraping.Core.Utils
 {
     public static class ConvertToBytes
     {
-        public static double ConvertStringNumberToBytes(double size, string typeSize)
+        /// <summary>
+        /// Use typeSize = "TB" or "GB" or "MB" or "KB"
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="typeSize"></param>
+        /// <returns></returns>
+        public static double ConvertNumberToBytes(double size, string typeSize)
         {
+            if (size < 0)
+                throw new ArgumentException("Size cannot be less than zero", "size");
+
             typeSize = typeSize.ToLower().Replace(" ", "");
             if (typeSize == "tb")
             {
