@@ -6,7 +6,7 @@ namespace WebScraping.Domain.Entities
     {
 
         public string Extension { get; set; }
-        public long CodeLines { get; protected set; }
+        public long Lines { get; protected set; }
         public double Bytes { get; protected set; }
 
 
@@ -15,10 +15,10 @@ namespace WebScraping.Domain.Entities
 
         }
 
-        public ProjectInfoGitHub(string extension, long codeLines, double bytes)
+        public ProjectInfoGitHub(string extension, long lines, double bytes)
         {
             this.Extension = extension;
-            this.CodeLines = codeLines;
+            this.Lines = lines;
             this.Bytes = bytes;
         }
 
@@ -29,7 +29,7 @@ namespace WebScraping.Domain.Entities
 
         public void SetCodeLines(long codeLines)
         {
-            this.CodeLines = codeLines;
+            this.Lines = codeLines;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace WebScraping.Core.Services.Handlers.ProjectInfoGitHub.GetProjectInfoGit
 
 
             //Create object response
-            var listInfoGrouped = _dicProjectInfo.Select(d => new Domain.Entities.ProjectInfoGitHub(d.Key, d.Value.CodeLines, d.Value.Bytes)).ToList();
+            var listInfoGrouped = _dicProjectInfo.Select(d => new Domain.Entities.ProjectInfoGitHub(d.Key, d.Value.Lines, d.Value.Bytes)).ToList();
             var response = new Domain.Commands.Response(this, listInfoGrouped);
 
             //Return result
@@ -126,7 +126,7 @@ namespace WebScraping.Core.Services.Handlers.ProjectInfoGitHub.GetProjectInfoGit
                         if (_dicProjectInfo.TryGetValue(extension, out linesBytes))
                         {
                             linesBytes.SetBytes(linesBytes.Bytes + bytes);
-                            linesBytes.SetCodeLines(linesBytes.CodeLines + Convert.ToInt64(codeLines));                            
+                            linesBytes.SetCodeLines(linesBytes.Lines + Convert.ToInt64(codeLines));                            
                             _dicProjectInfo[extension] = linesBytes;
                         }
                         else
