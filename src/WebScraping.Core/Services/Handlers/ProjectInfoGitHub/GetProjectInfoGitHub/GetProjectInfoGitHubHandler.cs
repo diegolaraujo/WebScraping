@@ -34,9 +34,9 @@ namespace WebScraping.Core.Services.Handlers.ProjectInfoGitHub.GetProjectInfoGit
                 AddNotification("Request", "Request is required!");
                 return new Domain.Commands.Response(this);
             }
-            
+           
             var urlProject = request.UrlGitHub.AbsoluteUri;
-
+            
             // download page from url parameter
             var htmlDocument = _httpClient.Load(urlProject);
             var cacheKey = urlProject.Substring(urlProject.IndexOf("com/") + 4);
