@@ -1,4 +1,4 @@
-# WebScraping - Getting Start
+# WebScraping - Getting Started
 
 Clone the repository and then compile and run the WebScraping.Api project.
 
